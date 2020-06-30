@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Post</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- CONTENT HEADER -->
+    <div class="container-fluid text-center">
+        <h1 class="mt-4">Add Post</h1>
+        <hr>
+    </div>
+
+    <!-- ADDING POST FORM -->
+    <div class="container-fluid">
+        <form method="post"
+              th:action="@{/admin/posts/add}"
+              th:object="${post}"
+              enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="post_title">Title</label>
+                <input type="text" class="form-control" id="post_title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="post_category">Category</label>
+                <select class="form-control" id="post_category" name="category">
+                    <option selected>Choose Category...</option>
+                    <option th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.title}">One</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="post_author">Author</label>
+                <input type="text" class="form-control" id="post_author" name="author">
+            </div>
+            <div class="form-group">
+                <label for="post_status">Status</label>
+                <input type="text" class="form-control" id="post_status" name="status">
+            </div>
+            <div class="form-group">
+                <label for="post_image">Image</label>
+                <input type="file" class="form-control-file" id="post_image" name="image">
+            </div>
+            <div class="form-group">
+                <label for="post_tags">Tags</label>
+                <input type="text" class="form-control" id="post_tags" name="tags">
+            </div>
+            <div class="form-group">
+                <label for="post_content">Content</label>
+                <textarea class="form-control" id="post_content" rows="3" name="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

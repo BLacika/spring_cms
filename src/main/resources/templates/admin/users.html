@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Users</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- CONTENT HEADER -->
+    <div class="container-fluid text-center">
+        <h1 class="mt-4">Users</h1>
+        <hr>
+    </div>
+
+    <!-- USERS TABLE -->
+    <div class="container-fluid">
+        <div>
+            <a th:href="@{/admin/users/add}">Add User</a>
+        </div>
+        <table class="table table-hover table-bordered table-fit mt-4 text-center">
+            <thead>
+            <tr>
+                <th class="fit">Id</th>
+                <th class="fit">Username</th>
+                <th class="fit">First Name</th>
+                <th class="fit">Last Name</th>
+                <th class="fit">Email</th>
+                <th class="fit">Roles</th>
+                <th class="fit">Created At</th>
+                <th class="fit">Updated At</th>
+                <th class="fit" colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td class="fit" th:text="${user.id}">Id</td>
+                    <td class="fit" th:text="${user.username}">Username</td>
+                    <td class="fit" th:text="${user.firstName}">First Name</td>
+                    <td class="fit" th:text="${user.lastName}">Last Name</td>
+                    <td class="fit" th:text="${user.email}">Email</td>
+                    <td class="fit" th:text="${user.roles}">Roles</td>
+                    <td class="fit" th:text="${#dates.format(user.createdAt, 'yyyy-MM-dd HH:mm')}">Created At</td>
+                    <td class="fit" th:text="${#dates.format(user.updatedAt, 'yyyy-MM-dd HH:mm')}">Updated At</td>
+                    <td class="fit" th:onclick="|window.location.href='/admin/users/${user.id}/edit'|"><button class="btn btn-primary">Edit</button></td>
+                    <td class="fit" th:onclick="|window.location.href='/admin/users/${user.id}/delete'|"><button class="btn btn-danger">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

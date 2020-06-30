@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h1 class="mt-4" th:text="${post.title}">Post Title</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#" th:text="${post.author}">Start Bootstrap</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>Posted on <span th:text="${#dates.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" th:src="'data:image/jpg;base64,' + ${post.file}"
+                     alt="Card image cap">
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead" th:text="${post.content}">Post Content</p>
+
+                <hr>
+
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/post/add_comment}" th:object="${comment}">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="comment_author">Author</label>
+                                    <input type="text" class="form-control"
+                                           id="comment_author" name="author" th:field="*{author}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment_email">Email address</label>
+                                    <input type="email" class="form-control"
+                                           id="comment_email" name="email" th:field="*{email}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment_content">Your comment:</label>
+                                    <textarea class="form-control" id="comment_content"
+                                              name="content" rows="3" th:field="*{content}"></textarea>
+                                </div>
+                                <input type="hidden" name="status" th:field="*{status}">
+                                <input type="hidden" name="post" th:field="*{post}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Single Comment -->
+                <div class="media mb-4" th:each="comment : ${comments}">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h5 class="mt-0" th:text="${comment.author}">Commenter Name</h5>
+                            </div>
+                            <div class="col-sm-4 ml-auto text-right">
+                                <span th:text="${#dates.format(comment.date, 'yyyy-MM-dd HH:mm')}"></span>
+                            </div>
+                        </div>
+                        <p th:text="${comment.content}">Content</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Widget -->
+                <div th:replace="fragments :: search"></div>
+
+                <!-- Categories Widget -->
+                <div th:replace="fragments :: categories"></div>
+
+                <!-- Side Widget -->
+                <div th:replace="fragments :: sidebar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Log In</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+          th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+
+</head>
+
+<body class="bg-primary">
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header">
+                                <h3 class="text-center font-weight-light my-4">
+                                    Create Account
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" th:action="@{/registration}" th:object="${newUser}">
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputFirstName">First Name</label>
+                                                <input class="form-control py-4" id="inputFirstName" type="text"
+                                                       placeholder="Enter first name" name="firstName" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputLastName">Last Name</label>
+                                                <input class="form-control py-4" id="inputLastName" type="text"
+                                                       placeholder="Enter last name" name="lastName" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                        <input class="form-control py-4" id="inputEmailAddress" type="email"
+                                               aria-describedby="emailHelp" placeholder="Enter email address"
+                                               name="email"/>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputPassword">Password</label>
+                                                <input class="form-control py-4" id="inputPassword" type="password"
+                                                       placeholder="Enter password" name="password" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputConfirmPassword">
+                                                    Confirm Password
+                                                </label>
+                                                <input class="form-control py-4" id="inputConfirmPassword"
+                                                       type="password" placeholder="Confirm password"
+                                                       name="passwordConfirm" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-4 mb-0">
+                                        <input type="submit" class="btn btn-primary btn-block" value="Create Account">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer text-center">
+                                <div class="small">
+                                    <a href="register.html">Have an account? Go to login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="js/scripts.js" th:href="@{/js/scripts.js}"></script>
+<script src="vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.js}"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

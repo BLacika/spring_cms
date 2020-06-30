@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- CONTENT HEADER -->
+    <div class="container-fluid text-center">
+        <h1 class="mt-4">Admin</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active text-center">Admin</li>
+        </ol>
+    </div>
+
+    <div class="container">
+        <h1>Current Date</h1>
+        <p th:text="${#dates.format(standardDate, 'yyyy-MM-dd HH:mm')}"></p>
+    </div>
+</div>
+</body>
+</html>

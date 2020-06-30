@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Posts</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- CONTENT HEADER -->
+    <div class="container-fluid text-center">
+        <h1 class="mt-4">Posts</h1>
+        <hr>
+    </div>
+
+    <!-- POSTS TABLE -->
+    <div class="container-fluid">
+        <div>
+            <a th:href="@{/admin/posts/add}">Add Post</a>
+        </div>
+        <table class="table table-hover table-bordered table-fit mt-4 text-center">
+            <thead>
+            <tr>
+                <th class="fit">Id</th>
+                <th class="fit">Author</th>
+                <th class="fit">Title</th>
+                <th class="fit">Category</th>
+                <th class="fit">Status</th>
+                <th class="fit">Image</th>
+                <th class="fit">Tags</th>
+                <th class="fit">Comments</th>
+                <th class="fit">Created At</th>
+                <th class="fit">Updated At</th>
+                <th class="fit" colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td class="fit" th:text="${post.id}">Id</td>
+                <td class="fit" th:text="${post.author}">Author</td>
+                <td class="fit" th:text="${post.title}">Title</td>
+                <td class="fit" th:text="${post.category.title}">Category</td>
+                <td class="fit" th:text="${post.status}">Status</td>
+                <td class="fit"><img class="rounded"
+                                     width="100"
+                                     th:src="'data:image/jpg;base64,' + ${post.file}"
+                                     alt="Image"></td>
+                <td class="fit" th:text="${post.tags}">Tags</td>
+                <td class="fit" th:text="${post.commentCount}">Comments</td>
+                <td class="fit" th:text="${#dates.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">Created At</td>
+                <td class="fit" th:text="${#dates.format(post.updatedAt, 'yyyy-MM-dd HH:mm')}">Updated At</td>
+                <td class="fit" th:onclick="|window.location.href='/admin/posts/${post.id}/edit'|"><button class="btn btn-primary">Edit</button></td>
+                <td class="fit" th:onclick="|window.location.href='/admin/posts/${post.id}/delete'|"><button class="btn btn-danger">Delete</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

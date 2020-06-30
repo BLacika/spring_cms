@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <!-- Blog Post -->
+                <div th:if="${not #lists.isEmpty(posts)}">
+                    <div th:each="post : ${posts}" class="card mb-4">
+                        <a th:href="@{/post/{id}(id=${post.id})}" style="text-decoration:none;">
+                            <h2 class="card-header" th:text="${post.title}">Post Title</h2>
+                        </a>
+                        <div class="card-body">
+                            <a th:href="@{/post/{id}(id=${post.id})}">
+                                <img class="card-img-top"
+                                     th:src="'data:image/jpg;base64,' + ${post.file}"
+                                     alt="Card image cap">
+                            </a>
+                            <p class="card-text" th:text="${post.content}">Post Content</p>
+                            <br>
+                            <p>Tags: <span th:text="${post.tags}">tags</span></p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted on <span th:text="${#dates.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">January 1, 2017</span>  by
+                            <a href="#" th:text="${post.author}">Start Bootstrap</a>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${#lists.isEmpty(posts)}">
+                    <h1>No Post Here!</h1>
+                </div>
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Widget -->
+                <div th:replace="fragments :: search"></div>
+
+                <!-- Categories Widget -->
+                <div th:replace="fragments :: categories"></div>
+
+                <!-- Side Widget -->
+                <div th:replace="fragments :: sidebar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

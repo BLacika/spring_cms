@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Categories</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- CONTENT HEADER -->
+    <div class="container-fluid text-center">
+        <h1 class="mt-4">Categories</h1>
+        <hr>
+    </div>
+
+    <!-- ADD CATEGORY FORM -->
+    <div class="container">
+        <h3>Add Category</h3>
+
+        <form class="form-inline" autocomplete="off" th:action="@{/admin/categories}" th:object="${category}" method="post">
+            <label for="title" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                   class="alert alert-danger mr-2"></label>
+            <input type="text" class="form-control mb-2 mr-sm-2"
+                   id="title" name="title" maxlength="32" th:field="*{title}" />
+
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+    </div>
+
+    <!-- CATEGORIES TABLE -->
+    <div class="container">
+        <table class="table table-hover table-bordered table-fit mt-4 text-center">
+            <thead>
+                <tr>
+                    <th class="fit">Id</th>
+                    <th class="fit">Title</th>
+                    <th class="fit">Created At</th>
+                    <th class="fit">Updated At</th>
+                    <th class="fit" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="category : ${categories}">
+                    <td class="fit" th:text="${category.id}">1</td>
+                    <td class="fit" th:text="${category.title}">Mark</td>
+                    <td class="fit" th:text="${category.createdAt}">Mark</td>
+                    <td class="fit" th:text="${category.updatedAt}">Mark</td>
+                    <td class="fit" th:onclick="|window.location.href='/admin/categories/${category.id}/edit'|"><button class="btn btn-primary">Edit</button></td>
+                    <td class="fit" th:onclick="|window.location.href='/admin/categories/${category.id}/delete'|"><button class="btn btn-danger">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

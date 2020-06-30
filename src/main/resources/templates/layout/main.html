@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title layout:title-pattern="$CONTENT_TITLE"></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+          th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav th:replace="fragments :: navigation"></nav>
+
+<!-- Page Content -->
+<div layout:fragment="content">
+    <p>Body contents</p>
+</div>
+
+<!-- Footer -->
+<footer th:replace="fragments :: footer"></footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="js/scripts.js" th:href="@{/js/scripts.js}"></script>
+<script src="vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.js}"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- CONTENT HEADER -->
+    <div class="container-fluid text-center">
+        <h1 class="mt-4">Edit Post</h1>
+        <hr>
+    </div>
+
+    <!-- EDITING POST FORM -->
+    <div class="container-fluid">
+        <form method="post"
+              th:action="@{/admin/posts}"
+              th:object="${post}"
+              enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="post_title"><strong>Title</strong></label>
+                <input type="text" class="form-control" id="post_title" name="title" th:field="*{title}">
+                <input type="hidden" th:field="*{id}"/>
+            </div>
+            <div class="form-group">
+                <label for="post_category"><strong>Category</strong></label>
+                <select class="form-control" id="post_category" name="category">
+                    <option th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.title}" th:selected="*{category.id}">One</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="post_author"><strong>Author</strong></label>
+                <input type="text" class="form-control" id="post_author" name="author" th:field="*{author}">
+            </div>
+            <div class="form-group">
+                <label for="post_status"><strong>Status</strong></label>
+                <input type="text" class="form-control" id="post_status" name="status" th:field="*{status}">
+            </div>
+            <div class="form-group">
+                <label for="post_image"><strong>Image</strong></label><br>
+                <img class="rounded"
+                     width="200"
+                     th:src="'data:image/jpg;base64,' + *{file}"
+                     alt="Image"
+                     id="post_image"><br>
+                <input type="file" class="form-control-file mt-2" id="post_image_browser" name="image">
+            </div>
+            <div class="form-group">
+                <label for="post_tags"><strong>Tags</strong></label>
+                <input type="text" class="form-control" id="post_tags" name="tags" th:field="*{tags}">
+            </div>
+            <div class="form-group">
+                <label for="post_content"><strong>Content</strong></label>
+                <textarea class="form-control"
+                          id="post_content"
+                          rows="3"
+                          name="content"
+                          th:field="*{content}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Post</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
